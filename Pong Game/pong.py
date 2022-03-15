@@ -3,12 +3,14 @@ from paddle import Paddle
 from ball import Ball
 from scoreboard import Scoreboard
 import time
+from tkinter.messagebox import askyesno
 
 
 #TODO1: Create the screen
 screen = Screen()
 screen.bgcolor("black")
 screen.setup(width=800, height=600)
+screen.cv._rootwindow.resizable(False, False)
 screen.title("Pong Game")
 screen.listen()
 screen.tracer(0) # Disableing the animations
@@ -32,6 +34,19 @@ ball = Ball()
 
 #TODO8: Keep scores
 scoreboard = Scoreboard()
+
+
+#TODO9: Reset Game
+def reset_game():
+    continue_game = askyesno("Game Over", "Do you want to play again?")
+    if continue_game:
+        scoreboard.reset_scoreboard()
+        ball.reset_position()
+        r_paddle.goto(350, 0)
+        l_paddle.goto(-350, 0)
+    else:
+        game_is_on = False
+        screen.bye()
 
 
 game_is_on = True
@@ -61,5 +76,8 @@ while game_is_on:
         ball.reset_position()
         scoreboard.r_point()
 
+    #TODO10: Detect when the game is over
+    if scoreboard.l_score == 2 or scoreboard.r_score == 2:
+        reset_game()
 
 screen.exitonclick()
