@@ -77,7 +77,7 @@ while game_is_on:
         scoreboard.r_point()
 
     #TODO10: Detect when the game is over
-    if scoreboard.l_score == 10 or scoreboard.r_score == 10:
+    if scoreboard.l_score == 5 or scoreboard.r_score == 5:
         reset_game()
 
 screen.exitonclick()
