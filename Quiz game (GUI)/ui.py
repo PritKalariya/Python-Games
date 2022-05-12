@@ -5,8 +5,6 @@ THEME_COLOR = "#375362"
 
 
 class QuizUserInterface:
-
-
     def __init__(self, quiz_brain: QuizBrain):
         self.quiz = quiz_brain
 
@@ -51,6 +49,7 @@ class QuizUserInterface:
             self.canvas.itemconfig(self.question_text, text="You have completed the quiz!")
             self.true_btn.config(state="disabled")
             self.false_btn.config(state="disabled")
+            self.window.destroy()
 
 
     def true_pressed(self):
