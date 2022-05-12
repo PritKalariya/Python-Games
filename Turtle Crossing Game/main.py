@@ -3,6 +3,8 @@ from turtle import Screen
 from player import Player
 from car_manager import CarManager
 from scoreboard import Scoreboard
+from tkinter import Tk, messagebox
+import os
 
 
 screen = Screen()
@@ -33,11 +35,22 @@ while game_is_on:
     cars.create_car()
     cars.move_car()
 
-    #TODO3: Detect turtle collission with cars
+    #TODO3: Detect turtle collission with cars---
     for car in cars.all_cars:
         if car.distance(player) < 20:
             game_is_on = False
             scoreboard.game_over()
+            messagebox.showinfo("Game Over", "You crashed into a car!")
+            play_again = messagebox.askyesno("Play Again?", "Would you like to play again?")
+            if play_again:
+                if os.getcwd().split('\\')[-1] == 'Turtle Crossing Game':
+                    os.system("python main.py")
+                else:
+                    os.chdir("Turtle Crossing Game")
+                    os.system("python main.py")
+                    os.chdir("..")
+            else:
+                screen.bye()
 
     #TODO4: Detect when turtle crosses the finish line
     if player.is_at_finish():
