@@ -3,6 +3,8 @@ from snake import Snake
 from food import Food
 from scoreboard import Scoreboard
 import time
+from tkinter import messagebox
+
 
 screen = Screen()
 screen.setup(width=600, height=600)
@@ -52,8 +54,14 @@ while game_is_on:
 
     #TODO6: End game (Collision with wall)
     if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
-        scoreboard.reset()
-        snake.reset()
+        # messagebox.showinfo("Game Over", f"Your final score was: {scoreboard.score}")
+        replay = messagebox.askquestion("Game Over", f"Your final score was: {scoreboard.score} \nWould you like to play again?")
+        if replay == "yes":
+            scoreboard.reset()
+            snake.reset()
+        else:
+            game_is_on = False
+            screen.bye()
 
 
     #TODO7: End game (Collision with tail)
